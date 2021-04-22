@@ -14,6 +14,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
+import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { MainComponent } from './main/main.component';
     FooterComponent,
     SidenavComponent,
     MainComponent,
+    BookmarksPageComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
