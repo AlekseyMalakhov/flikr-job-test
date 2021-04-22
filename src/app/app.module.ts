@@ -11,13 +11,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component'; 
+import { FooterComponent } from './footer/footer.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    SidenavComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,

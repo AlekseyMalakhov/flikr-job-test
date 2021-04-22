@@ -1,3 +1,6 @@
-.content {
+
+
+.example-container {
     flex: 1;
-}
+    background: "grey";
+  }

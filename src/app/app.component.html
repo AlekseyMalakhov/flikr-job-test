@@ -1,3 +1,10 @@
 <app-header></app-header>
-<div class="content">some shit</div>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened disableClose>
+        <app-sidenav></app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-main></app-main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 <app-footer></app-footer>
