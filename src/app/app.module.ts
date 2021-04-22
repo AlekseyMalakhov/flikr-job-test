@@ -10,12 +10,14 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { HeaderComponent } from './header/header.component'; 
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
