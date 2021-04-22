@@ -1,6 +1,8 @@
-
-
 .example-container {
     flex: 1;
     background: "grey";
-  }
+}
+
+mat-sidenav {
+    width: 100px;
+}
