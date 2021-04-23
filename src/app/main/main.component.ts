@@ -13,11 +13,7 @@ export class MainComponent implements OnInit {
   page:string = "";
 
   ngOnInit(): void {
-    this.page = this.ImageFinderService.getPage();
-  }
-
-  getPage(): string {
-    return this.ImageFinderService.getPage();
+    this.ImageFinderService.currentPage.subscribe(page => this.page = page);
   }
 
 }

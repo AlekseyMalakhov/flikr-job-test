@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,10 @@ export class ImageFinderService {
 
   constructor() { }
 
-  page = "search";
-  getPage(): string {
-    return this.page;
+  private page = new BehaviorSubject("search");
+  currentPage = this.page.asObservable();
+  changePage(newPage: string) {
+    this.page.next(newPage);
   }
-
-  setPage(page: string) {
-    this.page = page;
-  }
+  
 }

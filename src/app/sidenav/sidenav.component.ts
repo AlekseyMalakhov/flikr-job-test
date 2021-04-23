@@ -14,13 +14,11 @@ export class SidenavComponent implements OnInit {
   }
 
   onSearchPageSelect(): void {
-    console.log("select search page");
-    this.ImageFinderService.setPage("search");
+    this.ImageFinderService.changePage("search");
   }
 
   onBookmarksPageSelect(): void {
-    console.log("select bookmarks page");
-    this.ImageFinderService.setPage("bookmarks");
+    this.ImageFinderService.changePage("bookmarks");
   }
 
 }
