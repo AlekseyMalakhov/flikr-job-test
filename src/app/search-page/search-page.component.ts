@@ -8,52 +8,13 @@ import { ImageFinderService } from "../imagefinder.service";
 })
 export class SearchPageComponent implements OnInit {
 
-images = [
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "1.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "2.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "3.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "3.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "1.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "2.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "1.jpg",
-    },
-    {
-      name: "some place",
-      description: "#superplace",
-      img: "2.jpg",
-    }
-  ];
+images = [];
+    
 
   constructor(private ImageFinderService: ImageFinderService) { }
 
   ngOnInit(): void {
+    this.ImageFinderService.currentImages.subscribe(images => this.images = images);
   }
 
   search(e) {

@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from "../environments/environment";
+
+const createImages = (data) => {
+  const result: string[] = [];
+  data.photos.photo.map((el) => {
+    const url = `https://live.staticflickr.com/${el.server}/${el.id}_${el.secret}_m.jpg`
+    result.push(url);
+  });
+  return result;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +18,35 @@ export class ImageFinderService {
 
   constructor() { }
 
+  /*
+  farm: 66
+  id: "51133262821"
+  isfamily: 0
+  isfriend: 0
+  ispublic: 1
+  owner: "12639178@N07"
+  secret: "6bc2c9b2b9"
+  server: "65535"
+  title: "Wollschweber"
+  */
+  
+  private images = new BehaviorSubject([]);
+  currentImages = this.images.asObservable();
+  changeImages(newImages: string[]) {
+    this.images.next(newImages);
+  }  
+
   searchRequest(searchText) {
     var xhttp = new XMLHttpRequest();
+    const changeIMG = this.changeImages.bind(this);
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
+        const images = createImages(JSON.parse(this.responseText));
+        changeIMG(images);        
       }
     };
-    xhttp.open("GET", `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=1602f3a321b52a9d5d58447c288352bf&text=${searchText}&format=json&nojsoncallback=1`, true);
+    const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${environment.key}&text=${searchText}&format=json&nojsoncallback=1`;
+    xhttp.open("GET", url, true);
     xhttp.send();
   }
 
