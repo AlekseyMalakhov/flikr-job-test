@@ -18,6 +18,8 @@ import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.componen
 import { SearchPageComponent } from './search-page/search-page.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
+import { CardComponent } from './card/card.component'; 
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import {MatInputModule} from '@angular/material/input';
     MainComponent,
     BookmarksPageComponent,
     SearchPageComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import {MatInputModule} from '@angular/material/input';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
