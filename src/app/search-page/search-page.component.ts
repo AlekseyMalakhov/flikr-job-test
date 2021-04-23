@@ -9,6 +9,49 @@ export class SearchPageComponent implements OnInit {
 
   searchInput: string = "";
 
+  images = [
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "1.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "2.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "3.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "3.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "1.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "2.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "1.jpg",
+    },
+    {
+      name: "some place",
+      description: "#superplace",
+      img: "2.jpg",
+    }
+  ];
+
   constructor() { }
 
   ngOnInit(): void {

@@ -2,27 +2,13 @@
     <form class="searchInput">
         <mat-form-field class = "search">
           <mat-label>Find images</mat-label>
-          <input matInput placeholder="Cute cats" (keyup) = "search($event)">
+          <input matInput placeholder="e.g. Cute cats" (keyup) = "search($event)">
         </mat-form-field>
     </form>
-
     <div class="cards">
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-
+        <ng-container *ngFor="let image of images">
+            <app-card [image]="image"></app-card>
+        </ng-container>
     </div>
 </div>
 
