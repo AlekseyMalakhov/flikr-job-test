@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImageFinderService } from "../imagefinder.service";
 
 @Component({
   selector: 'app-search-page',
@@ -7,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchPageComponent implements OnInit {
 
-  searchInput: string = "";
-
-  images = [
+images = [
     {
       name: "some place",
       description: "#superplace",
@@ -52,13 +51,14 @@ export class SearchPageComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private ImageFinderService: ImageFinderService) { }
 
   ngOnInit(): void {
   }
 
   search(e) {
     console.log(e.target.value);
+    this.ImageFinderService.changeSearchText(e.target.value);
   }
 
 }
