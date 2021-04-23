@@ -16,6 +16,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
 import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
