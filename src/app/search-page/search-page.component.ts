@@ -8,17 +8,17 @@ import { ImageFinderService } from "../imagefinder.service";
 })
 export class SearchPageComponent implements OnInit {
 
-images = [];
-    
+  searchText = "";
+  images = [];    
 
   constructor(private ImageFinderService: ImageFinderService) { }
 
   ngOnInit(): void {
     this.ImageFinderService.currentImages.subscribe(images => this.images = images);
+    this.ImageFinderService.currentSearchText.subscribe(searchText => this.searchText = searchText);
   }
 
   search(e) {
-    console.log(e.target.value);
     this.ImageFinderService.changeSearchText(e.target.value);
   }
 
