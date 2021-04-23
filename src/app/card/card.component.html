@@ -2,10 +2,15 @@
     <img src="{{image}}" alt="picture">
     <div class="content">
         <div class="action">
-            <a mat-stroked-button>Bookmark it!</a>
+            <a mat-stroked-button (click)="addBookmark()">Bookmark it!</a>
         </div>
         <mat-card-content>
-            <p>"Blablabla"</p>
+            <form class="searchInput">
+                <mat-form-field class = "search">
+                  <mat-label>Add tags</mat-label>
+                  <input matInput placeholder="#cool" [value] = "tags" (keyup) = "addTags($event)">
+                </mat-form-field>
+            </form>
         </mat-card-content>
     </div>    
 </mat-card>
