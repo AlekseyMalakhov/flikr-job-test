@@ -22,6 +22,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './card/card.component';
+import { SavedCardComponent } from './saved-card/saved-card.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { CardComponent } from './card/card.component';
     BookmarksPageComponent,
     SearchPageComponent,
     CardComponent,
+    SavedCardComponent,
   ],
   imports: [
     BrowserModule,

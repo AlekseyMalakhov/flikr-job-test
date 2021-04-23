@@ -1,0 +1,11 @@
+<mat-card>
+    <img src="{{image.url}}" alt="picture">
+    <div class="content">
+        <div class="action">
+            <a mat-stroked-button (click)="delete()">Remove it!</a>
+        </div>
+        <mat-card-content>
+            <span>{{image.tags}}</span>
+        </mat-card-content>
+    </div>    
+</mat-card>

@@ -17,7 +17,6 @@ export class CardComponent implements OnInit {
 
   addTags(e) {
     this.tags = e.target.value;
-    console.log(e.target.value);
   }
 
   addBookmark() {
@@ -25,15 +24,12 @@ export class CardComponent implements OnInit {
       url: this.image,
       tags: this.tags,
     }
-    console.log(imageObj);
-
     const bookmarks = localStorage.getItem("imageFinder");
     let arr = [];
     if (bookmarks) {
         arr = JSON.parse(bookmarks);
     }
     arr.push(imageObj);
-    console.log(arr);
     const JSONstr = JSON.stringify(arr);
     localStorage.setItem("imageFinder", JSONstr);
   }

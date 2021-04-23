@@ -1,1 +1,5 @@
-<p>bookmarks-page works!</p>
+<div class="cards">
+    <ng-container *ngFor="let image of images; index as i">
+        <app-saved-card [image]="image" [index]="i" (removeItemEvent) = "updateImages()"></app-saved-card>
+    </ng-container>
+</div>
