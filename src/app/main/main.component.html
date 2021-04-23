@@ -1,2 +1,2 @@
-<app-search-page></app-search-page>
-<h2>{{page}}</h2>
+<app-search-page *ngIf="page === 'search'"></app-search-page>
+<app-bookmarks-page *ngIf="page === 'bookmarks'"></app-bookmarks-page>
