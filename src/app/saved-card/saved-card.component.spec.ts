@@ -5,7 +5,15 @@ import { SavedCardComponent } from './saved-card.component';
 const mockImg = {
   url: "testURL",
   tags: "test tags"
-}
+};
+
+const mockSavedImgs = [
+  {url:"test1.jpg",tags:"test"},
+  {url:"test2.jpg",tags:"test"},
+  {url:"test3.jpg",tags:"test"},
+];
+const JSONstr = JSON.stringify(mockSavedImgs);
+localStorage.setItem("imageFinder", JSONstr);
 
 describe('SavedCardComponent', () => {
   let component: SavedCardComponent;
@@ -22,10 +30,19 @@ describe('SavedCardComponent', () => {
     fixture = TestBed.createComponent(SavedCardComponent);
     component = fixture.componentInstance;
     component.image = mockImg;
+    component.index = 1;
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should delete image", () => {
+    const deleteButton = fixture.nativeElement.querySelector("#del_img_button");
+    deleteButton.click();
+    const bookmarks = localStorage.getItem("imageFinder");
+    console.log(bookmarks);
+    expect(bookmarks).toEqual('[{"url":"test1.jpg","tags":"test"},{"url":"test3.jpg","tags":"test"}]');
   });
 });
