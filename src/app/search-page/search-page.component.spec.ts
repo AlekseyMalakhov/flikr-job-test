@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchPageComponent } from './search-page.component';
-
 import { BehaviorSubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ImageFinderService } from "../imagefinder.service";
@@ -41,7 +40,7 @@ describe('SearchPageComponent', () => {
   });
 
   it("should send search string", () => {
-    const input = fixture.nativeElement.querySelector("#searchInput");
+    const input = fixture.nativeElement.querySelector(".search input");
     input.value = "test test";
     const event = new KeyboardEvent("keyup");
     input.dispatchEvent(event);

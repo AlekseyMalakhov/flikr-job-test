@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {
@@ -19,7 +18,25 @@ describe('CardComponent', () => {
     fixture.detectChanges();
   });
 
-  xit('should create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should add a tag", () => {
+    const input = fixture.nativeElement.querySelector(".tagInput input");
+    input.value = "test test";
+    const event = new KeyboardEvent("keyup");
+    input.dispatchEvent(event);
+    expect(component.tags).toEqual("test test");
+  });
+
+  it("should save bookmark", () => {
+    localStorage.clear();
+    component.image = "testURL";
+    component.tags = "some tags";
+    const addButton = fixture.nativeElement.querySelector(".action button");
+    addButton.click();
+    const bookmarks = localStorage.getItem("imageFinder");    
+    expect(bookmarks).toEqual(`[{"url":"testURL","tags":"some tags"}]`);
   });
 });

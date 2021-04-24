@@ -2,11 +2,11 @@
     <img src="{{image}}" alt="picture">
     <div class="content">
         <div class="action">
-            <a mat-stroked-button (click)="addBookmark()">Bookmark it!</a>
+            <button mat-stroked-button (click)="addBookmark()">Bookmark it!</button>
         </div>
         <mat-card-content>
-            <form class="searchInput">
-                <mat-form-field class = "search">
+            <form class="tagInput">
+                <mat-form-field class = "tags">
                   <mat-label>Add tags</mat-label>
                   <input matInput placeholder="#cool" [value] = "tags" (keyup) = "addTags($event)">
                 </mat-form-field>

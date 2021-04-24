@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SavedCardComponent } from './saved-card.component';
 
 const mockImg = {
@@ -12,8 +11,6 @@ const mockSavedImgs = [
   {url:"test2.jpg",tags:"test"},
   {url:"test3.jpg",tags:"test"},
 ];
-const JSONstr = JSON.stringify(mockSavedImgs);
-localStorage.setItem("imageFinder", JSONstr);
 
 describe('SavedCardComponent', () => {
   let component: SavedCardComponent;
@@ -39,10 +36,11 @@ describe('SavedCardComponent', () => {
   });
 
   it("should delete image", () => {
-    const deleteButton = fixture.nativeElement.querySelector("#del_img_button");
+    const JSONstr = JSON.stringify(mockSavedImgs);
+    localStorage.setItem("imageFinder", JSONstr);
+    const deleteButton = fixture.nativeElement.querySelector(".action button");
     deleteButton.click();
     const bookmarks = localStorage.getItem("imageFinder");
-    console.log(bookmarks);
     expect(bookmarks).toEqual('[{"url":"test1.jpg","tags":"test"},{"url":"test3.jpg","tags":"test"}]');
   });
 });
