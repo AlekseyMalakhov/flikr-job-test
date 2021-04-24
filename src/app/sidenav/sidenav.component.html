@@ -1,9 +1,18 @@
 <div class="container">
-    <button mat-icon-button [color]="searchIconColor" aria-label="Search page" (click)="onSearchPageSelect()">
-        <mat-icon>cloud</mat-icon>
+    <button mat-icon-button 
+        [color]="searchIconColor" 
+        aria-label="Search page" 
+        (click)="onSearchPageSelect()"
+        id="searchPageButton">
+            <mat-icon>cloud</mat-icon>
     </button>
-    <button mat-icon-button [color]="bookmarksIconColor" aria-label="Bookmarks page" (click)="onBookmarksPageSelect()">
-        <mat-icon>menu_book</mat-icon>
+    <button mat-icon-button 
+        [color]="bookmarksIconColor" 
+        aria-label="Bookmarks page" 
+        (click)="onBookmarksPageSelect()"
+        id="bookmarksPageButton">
+        >
+            <mat-icon>menu_book</mat-icon>
     </button>
 </div>
 
