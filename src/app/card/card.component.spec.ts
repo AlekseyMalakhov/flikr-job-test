@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -7,7 +8,8 @@ describe('CardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardComponent ]
+      declarations: [ CardComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   });
@@ -36,7 +38,8 @@ describe('CardComponent', () => {
     component.tags = "some tags";
     const addButton = fixture.nativeElement.querySelector(".action button");
     addButton.click();
-    const bookmarks = localStorage.getItem("imageFinder");    
+    const bookmarks = localStorage.getItem("imageFinder");  
     expect(bookmarks).toEqual(`[{"url":"testURL","tags":"some tags"}]`);
+    localStorage.clear();
   });
 });
