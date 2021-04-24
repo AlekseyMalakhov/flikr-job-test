@@ -23,6 +23,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './card/card.component';
 import { SavedCardComponent } from './saved-card/saved-card.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SavedCardComponent } from './saved-card/saved-card.component';
     MatCardModule,
     HttpClientModule,
     FormsModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

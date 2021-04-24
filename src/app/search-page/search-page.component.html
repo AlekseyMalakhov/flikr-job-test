@@ -1,15 +1,34 @@
-<div class="container">
+<div class="container">  
     <form class="searchInput">
         <mat-form-field class = "search">
           <mat-label>Find images</mat-label>
           <input matInput placeholder="e.g. Cute cats" [value] = "searchText" (keyup) = "search($event)">
         </mat-form-field>
     </form>
+
+    <mat-paginator
+        *ngIf="length !== 0"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex">
+    </mat-paginator>
+
     <div class="cards">
-        <ng-container *ngFor="let image of images">
+        <ng-container *ngFor="let image of imagesOnPage">
             <app-card [image]="image"></app-card>
         </ng-container>
     </div>
+
+    <mat-paginator
+        *ngIf="length !== 0"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex">
+    </mat-paginator>
 </div>
 
 
