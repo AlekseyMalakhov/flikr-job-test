@@ -7,22 +7,21 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./saved-card.component.css']
 })
 export class SavedCardComponent implements OnInit {
-
   @Output() removeItemEvent = new EventEmitter<any>();
 
   @Input() image;
   @Input() index;
+  @Input() first_item;
   tags = "";
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   delete() {
     const bookmarks = localStorage.getItem("imageFinder");
     const arr = JSON.parse(bookmarks);
-    arr.splice(this.index, 1);
+    arr.splice((this.first_item + this.index), 1);
     const JSONstr = JSON.stringify(arr);
     localStorage.setItem("imageFinder", JSONstr);
     this.removeItemEvent.emit();

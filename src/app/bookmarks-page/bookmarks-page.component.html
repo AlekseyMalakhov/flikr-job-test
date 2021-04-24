@@ -1,5 +1,31 @@
-<div class="cards">
-    <ng-container *ngFor="let image of images; index as i">
-        <app-saved-card [image]="image" [index]="i" (removeItemEvent) = "updateImages()"></app-saved-card>
-    </ng-container>
-</div>
+<div class="container">  
+    <mat-paginator
+        *ngIf="length !== 0"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex">
+    </mat-paginator>
+
+    <div class="cards">
+        <ng-container *ngFor="let image of imagesOnPage; index as i">
+            <app-saved-card 
+                [image]="image" 
+                [index]="i" 
+                (removeItemEvent) = "updateImages()" 
+                [first_item] = "first_item">
+            </app-saved-card>
+        </ng-container>
+    </div>
+
+    <mat-paginator
+        *ngIf="length !== 0"
+        (page)="handlePageEvent($event)"
+        [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex">
+    </mat-paginator>
+</div>  
+
