@@ -3,13 +3,33 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from "../environments/environment";
 
 const createImages = (data) => {
-  const result: string[] = [];
+  type imageObj = {
+    url: string;
+    title: string;
+  };
+  
+  const result: imageObj[] = [];
   data.photos.photo.map((el) => {
-    const url = `https://live.staticflickr.com/${el.server}/${el.id}_${el.secret}_m.jpg`
-    result.push(url);
+    const image = {
+      url: `https://live.staticflickr.com/${el.server}/${el.id}_${el.secret}_m.jpg`,
+      title: el.title,
+    };
+    result.push(image);
   });
   return result;
 }
+
+/*
+  farm: 66
+  id: "51133262821"
+  isfamily: 0
+  isfriend: 0
+  ispublic: 1
+  owner: "12639178@N07"
+  secret: "6bc2c9b2b9"
+  server: "65535"
+  title: "Wollschweber"
+  */
 
 @Injectable({
   providedIn: 'root'

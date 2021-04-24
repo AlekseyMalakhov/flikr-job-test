@@ -21,7 +21,8 @@ export class CardComponent implements OnInit {
 
   addBookmark() {
     const imageObj = {
-      url: this.image,
+      url: this.image.url,
+      title: this.image.title,
       tags: this.tags,
     }
     const bookmarks = localStorage.getItem("imageFinder");

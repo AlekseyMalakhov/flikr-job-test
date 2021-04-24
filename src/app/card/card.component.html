@@ -1,5 +1,8 @@
 <mat-card>
-    <img src="{{image}}" alt="picture">
+    <mat-card-header>
+        <mat-card-title>{{image.title}}</mat-card-title>
+    </mat-card-header>
+    <img src="{{image.url}}" alt="picture">
     <div class="content">
         <div class="action">
             <button mat-stroked-button (click)="addBookmark()">Bookmark it!</button>
