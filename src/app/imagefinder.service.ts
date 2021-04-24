@@ -15,20 +15,7 @@ const createImages = (data) => {
   providedIn: 'root'
 })
 export class ImageFinderService {
-
   constructor() { }
-
-  /*
-  farm: 66
-  id: "51133262821"
-  isfamily: 0
-  isfriend: 0
-  ispublic: 1
-  owner: "12639178@N07"
-  secret: "6bc2c9b2b9"
-  server: "65535"
-  title: "Wollschweber"
-  */
   
   private images = new BehaviorSubject([]);
   currentImages = this.images.asObservable();

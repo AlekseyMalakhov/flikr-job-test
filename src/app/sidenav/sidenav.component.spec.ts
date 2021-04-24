@@ -4,18 +4,15 @@ import { BehaviorSubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ImageFinderService } from "../imagefinder.service";
 
+let page_str = "";
 class MockService {  
-  private page = new BehaviorSubject("search");
+  private page = new BehaviorSubject("search123");
   currentPage = this.page.asObservable();
   changePage(newPage: string) {
-    console.log("newPage = " + newPage);
     this.page.next(newPage);
+    page_str = newPage;
   }  
 }
-
-let page_str = "";
-const image_service = new MockService();
-image_service.currentPage.subscribe(page => page_str = page);
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -33,7 +30,6 @@ describe('SidenavComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SidenavComponent);
     component = fixture.componentInstance;
-    console.log(component);
     fixture.detectChanges();
   });
 
@@ -41,10 +37,16 @@ describe('SidenavComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should change page", () => {
-    console.log(component);
+  it("should change page to bookmarks", () => {
     const bookmarksButton = fixture.nativeElement.querySelector("#bookmarksPageButton");
     bookmarksButton.click();
-    console.log("after click = " + page_str);
+    expect(page_str).toEqual("bookmarks")
   });
+
+  it("should change page to search", () => {
+    const bookmarksButton = fixture.nativeElement.querySelector("#searchPageButton");
+    bookmarksButton.click();
+    expect(page_str).toEqual("search");
+  });
+
 });
