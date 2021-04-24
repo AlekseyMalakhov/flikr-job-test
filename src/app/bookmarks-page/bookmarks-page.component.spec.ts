@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookmarksPageComponent } from './bookmarks-page.component';
-import { SavedCardComponent } from '../saved-card/saved-card.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 const mockSavedImgs = [
