@@ -9,7 +9,6 @@ interface User {
   providedIn: 'root'
 })
 export class RaindropService {
-
   constructor() { }
 
   private user = new BehaviorSubject({fullName: ""});
@@ -100,10 +99,17 @@ export class RaindropService {
     xhttp.send();
   }
 
+  private collID = new BehaviorSubject(0);
+  currentCollID = this.collID.asObservable();
+  changeCollID(id: number) {
+    this.collID.next(id);
+  }
+
   checkCollections(resp) {
     const coll = resp.items.find((el) => el.title === "ImageFinder");
     if (coll) {
       this.getCollection(coll._id);
+      this.changeCollID(coll._id)
     } else {
       this.createCollection();
     }
@@ -142,6 +148,19 @@ export class RaindropService {
     xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${collID}`, true);
     xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
     xhttp.send();
+  }
+
+  createBookmark(imageObj) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhttp.open("POST", "https://api.raindrop.io/rest/v1/raindrop", true);
+    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(imageObj);
   }
 
 

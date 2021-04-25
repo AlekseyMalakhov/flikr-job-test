@@ -8,10 +8,11 @@
             <button mat-stroked-button (click)="addBookmark()">Bookmark it!</button>
         </div>
         <mat-card-content>
+            <p>{{tagsString}}</p>
             <form class="tagInput">
                 <mat-form-field class = "tags">
-                  <mat-label>Add tags</mat-label>
-                  <input matInput placeholder="#cool" [value] = "tags" (keyup) = "addTags($event)">
+                  <mat-label>Add a tag</mat-label>
+                  <input matInput placeholder="#cool" [value] = "tag" (keyup) = "addTag($event)">
                 </mat-form-field>
             </form>
         </mat-card-content>
