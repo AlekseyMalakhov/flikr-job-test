@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,13 @@ import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './card/card.component';
 import { SavedCardComponent } from './saved-card/saved-card.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+
+const appRoutes: Routes = [
+  {
+    path: '',
+    component: AppComponent,
+  },  
+];
 
 @NgModule({
   declarations: [
@@ -52,6 +60,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     FormsModule,
     MatPaginatorModule,
+    RouterModule.forRoot(appRoutes),
   ],
   providers: [],
   bootstrap: [AppComponent]
