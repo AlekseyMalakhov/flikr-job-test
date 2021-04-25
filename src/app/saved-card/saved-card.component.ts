@@ -16,7 +16,18 @@ export class SavedCardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const tagsArr = this.image.tags;
+    let str = "";
+    tagsArr.forEach((el, i) => {
+      if (i === 0) {
+        str = "#" + el;
+      } else {
+        str = str + " #" + el;
+      }      
+    });
+    this.tags = str;
+  }
 
   delete() {
     const bookmarks = localStorage.getItem("imageFinder");
