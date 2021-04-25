@@ -8,3 +8,12 @@ mat-toolbar {
     width: 36px;
     line-height: 36px;
 }
+
+a {
+    margin-left: 10px;
+}
+
+.name {
+    position: relative;
+    top: 4px;
+}

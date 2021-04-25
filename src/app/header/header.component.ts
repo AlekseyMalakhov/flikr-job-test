@@ -10,20 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
+  user = {fullName: ""}
 
   constructor(private raindrop: RaindropService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      console.log(params.code);
       if (params.code) {
         this.raindrop.changeAuthCode(params.code);
       }
     });
+    this.raindrop.currentUser.subscribe(user => this.user = user);
   }
 
   getCollection() {
-    this.raindrop.getCollection();
+    this.raindrop.getCollections();
   }
 
 }

@@ -28,29 +28,12 @@ app.post('/get_token', function(req, res){
     headers: {"Content-type": "application/json"}
   };
   request(params, (err, resp, body) => {
-    console.log(resp.statusCode);
     if (err || resp.statusCode !== 200) {
       return res.status(500).json({ type: 'error', message: err });
     }
     res.send(body);
   });
 });
-
-
-/*
-app.get('/jokes/random', (req, res) => {
-  request(
-    { url: 'https://joke-api-strict-cors.appspot.com/jokes/random' },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: err.message });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  )
-});
-*/
 
 
 
