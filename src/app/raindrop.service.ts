@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-@Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class HeaderComponent implements OnInit {
+export class RaindropService implements OnInit {
+
   constructor(private route: ActivatedRoute) { }
+
   code: string = "";
 
   ngOnInit(): void {
@@ -85,5 +86,8 @@ export class HeaderComponent implements OnInit {
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(newCollection));
   }
+
+
+
 
 }
