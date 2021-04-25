@@ -40,10 +40,6 @@ export class CardComponent implements OnInit {
     this.tagsString = str;
   }
 
-  addTags(e) {
-    this.tags = e.target.value.split(" ");
-  }
-
   addBookmark() {
     const imageObj = {
       link: this.image.url,
@@ -56,14 +52,6 @@ export class CardComponent implements OnInit {
     }
     const JSONstr = JSON.stringify(imageObj);
     this.raindrop.createBookmark(JSONstr);
-    // const bookmarks = localStorage.getItem("imageFinder");
-    // let arr = [];
-    // if (bookmarks) {
-    //     arr = JSON.parse(bookmarks);
-    // }
-    // arr.push(imageObj);
-    // const JSONstr = JSON.stringify(arr);
-    // localStorage.setItem("imageFinder", JSONstr);
   }
 
 }
