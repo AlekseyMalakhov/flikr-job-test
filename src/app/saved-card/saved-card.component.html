@@ -2,13 +2,13 @@
     <mat-card-header>
         <mat-card-title>{{image.title}}</mat-card-title>
     </mat-card-header>
-    <img src="{{image.url}}" alt="picture">
+    <img src="{{image.link}}" alt="picture">
     <div class="content">
         <div class="action">
             <button mat-stroked-button (click)="delete()">Remove it!</button>
         </div>
         <mat-card-content>
-            <span>{{image.tags}}</span>
+            <span>{{image.tags[0]}}</span>
         </mat-card-content>
     </div>    
 </mat-card>

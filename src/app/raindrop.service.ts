@@ -135,11 +135,19 @@ export class RaindropService {
     xhttp.send(JSON.stringify(newCollection));
   }
 
+  private images = new BehaviorSubject([]);
+  currentImages = this.images.asObservable();
+  changeImages(newImages: string[]) {
+    this.images.next(newImages);
+  }
+
   getCollection(collID) {
     const xhttp = new XMLHttpRequest();
+    const setImages = this.changeImages.bind(this);
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(JSON.parse(this.responseText));
+        const images = JSON.parse(this.responseText).items;
+        setImages(images);
       }
     };
     xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${collID}`, true);

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
+import { RaindropService } from "../raindrop.service";
 
 @Component({
   selector: 'app-bookmarks-page',
@@ -22,20 +23,25 @@ export class BookmarksPageComponent implements OnInit {
       this._length = value;
   }
 
-  constructor() { }
+  constructor(private raindrop: RaindropService) { }
 
   images = [];
   imagesOnPage = []; 
 
   ngOnInit(): void {
-    this.updateImages();
+    this.raindrop.currentImages.subscribe(images => {
+      this.images = images;
+      this.length = this.images.length;
+      this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
+    });
   }
 
   updateImages() {
-    const imgString = localStorage.getItem("imageFinder");
-    this.images = JSON.parse(imgString);
-    this.length = this.images.length;
-    this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
+
+    // const imgString = localStorage.getItem("imageFinder");
+    // this.images = JSON.parse(imgString);
+    // this.length = this.images.length;
+    // this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
   }
 
   handlePageEvent(event: PageEvent) {
