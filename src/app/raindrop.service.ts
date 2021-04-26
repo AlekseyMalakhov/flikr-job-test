@@ -170,30 +170,12 @@ export class RaindropService {
     this.createBookmarkRequest(imageObj).subscribe();
   }
 
-  // createBookmark(imageObj) {
-  //   const xhttp = new XMLHttpRequest();
-  //   xhttp.onreadystatechange = function() {
-  //     if (this.readyState == 4 && this.status == 200) {
-  //     }
-  //   };
-  //   xhttp.open("POST", "https://api.raindrop.io/rest/v1/raindrop", true);
-  //   xhttp.setRequestHeader("Authorization", this.access_token);
-  //   xhttp.setRequestHeader("Content-type", "application/json");
-  //   xhttp.send(imageObj);
-  // }
+  deleteBookmarkRequest(imageID) {
+    return this.http.delete(url + `/raindrop/${imageID}`, this.authHeaders);
+  }
 
   deleteBookmark(imageID) {
-    const update = this.getCollection.bind(this);
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-        update();
-      }
-    };
-    xhttp.open("DELETE", `https://api.raindrop.io/rest/v1/raindrop/${imageID}`, true);
-    xhttp.setRequestHeader("Authorization", this.access_token);
-    xhttp.send();
+    this.deleteBookmarkRequest(imageID).subscribe(resp => this.getCollection());
   }
 
   logout() {
