@@ -12,11 +12,13 @@ export class CardComponent implements OnInit {
   tagsString = "";
   tag = "";
   collID = 0;
+  user = {fullName: "", _id: null}
 
   constructor(private raindrop: RaindropService) { }
 
   ngOnInit(): void {
     this.raindrop.currentCollID.subscribe(id => this.collID = id);
+    this.raindrop.currentUser.subscribe(user => this.user = user);
   }
 
   addTag(e) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageFinderService } from "../imagefinder.service";
+import { RaindropService } from "../raindrop.service";
 import {PageEvent} from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -14,7 +15,8 @@ export class SearchPageComponent implements OnInit {
 
   searchText = "";
   images = [];
-  imagesOnPage = [];  
+  imagesOnPage = [];
+  user = {fullName: "", _id: null}
   
   // MatPaginator
   pageSize = 25;  //items per page
@@ -31,7 +33,7 @@ export class SearchPageComponent implements OnInit {
       this._length = value;
   }
   
-  constructor(private ImageFinderService: ImageFinderService) { }
+  constructor(private ImageFinderService: ImageFinderService, private raindrop: RaindropService) { }
 
   ngOnInit(): void {
     this.ImageFinderService.currentImages.subscribe(images => {
@@ -40,6 +42,7 @@ export class SearchPageComponent implements OnInit {
       this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
     });
     this.ImageFinderService.currentSearchText.subscribe(searchText => this.searchText = searchText);
+    this.raindrop.currentUser.subscribe(user => this.user = user);
     //this.subject.pipe(debounceTime(10000)).subscribe(searchText => this.search(searchText));
   }  
 
