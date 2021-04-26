@@ -172,6 +172,7 @@ export class RaindropService {
     this.access_token = "";
     this.changeUser({fullName: "", _id: null});
     localStorage.removeItem("raindropToken");
+    window.location.href = "/";
   }
 
 
