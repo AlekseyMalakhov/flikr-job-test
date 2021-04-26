@@ -1,4 +1,4 @@
-<div class="container">  
+<div class="container" *ngIf = "user._id">  
     <mat-paginator
         *ngIf="length !== 0"
         (page)="handlePageEvent($event)"
@@ -26,5 +26,9 @@
         [pageSizeOptions]="pageSizeOptions"
         [pageIndex]="pageIndex">
     </mat-paginator>
-</div>  
+</div>
+
+<div class="container" *ngIf = "!user._id">
+    <p>To see your bookmarks, please <a [href]="code_url">login</a></p>
+</div>
 

@@ -1,16 +1,18 @@
 <mat-toolbar color="primary">
     <div>
         <span>Image Finder</span>
-    </div>
-    
-    <button mat-stroked-button (click)="getCollection()">Login</button>
-    <button mat-stroked-button (click) = "getCollection()">Test</button>
-    
+    </div>   
     <div>
         <span class="name">{{user.fullName}}</span>
-        <a mat-icon-button  [href]="code_url" target="_blank">
+        <a mat-icon-button  [href]="code_url" target="_blank" *ngIf="!user._id">
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </a>
-    </div>
-    
+        
+        <button mat-icon-button  [href]="code_url" target="_blank" *ngIf="user._id" [matMenuTriggerFor]="menu">
+            <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
+    </div>        
 </mat-toolbar>

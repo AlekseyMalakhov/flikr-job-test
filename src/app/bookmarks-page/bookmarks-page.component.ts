@@ -26,7 +26,9 @@ export class BookmarksPageComponent implements OnInit {
   constructor(private raindrop: RaindropService) { }
 
   images = [];
-  imagesOnPage = []; 
+  imagesOnPage = [];
+  user = {fullName: "", _id: null};
+  code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
 
   ngOnInit(): void {
     this.raindrop.currentImages.subscribe(images => {
@@ -35,6 +37,7 @@ export class BookmarksPageComponent implements OnInit {
       this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
     });
     this.raindrop.getCollection();
+    this.raindrop.currentUser.subscribe(user => this.user = user);
   }
 
   handlePageEvent(event: PageEvent) {

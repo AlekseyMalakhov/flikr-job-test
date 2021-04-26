@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
-  user = {fullName: ""}
+  user = {fullName: "", _id: null}
 
   constructor(private raindrop: RaindropService, private route: ActivatedRoute) { }
 
@@ -23,8 +23,8 @@ export class HeaderComponent implements OnInit {
     this.raindrop.currentUser.subscribe(user => this.user = user);
   }
 
-  getCollection() {
-    this.raindrop.getCollections();
+  logout() {
+    this.raindrop.logout();
   }
 
 }

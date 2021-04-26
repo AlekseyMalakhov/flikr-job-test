@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 interface User {
   fullName: string;
+  _id: null;
 }
 
 @Injectable({
@@ -11,7 +12,7 @@ interface User {
 export class RaindropService {
   constructor() { }
 
-  private user = new BehaviorSubject({fullName: ""});
+  private user = new BehaviorSubject({fullName: "", _id: null});
   currentUser = this.user.asObservable();
   changeUser(newUser: User) {
     this.user.next(newUser);
@@ -41,7 +42,7 @@ export class RaindropService {
       this.access_token = token;
     } 
     const existingToken = localStorage.getItem("raindropToken");
-    if (existingToken) {
+    if (existingToken && existingToken !== "undefined") {
       setToken(existingToken);
       getUser();
       getColls();
@@ -177,6 +178,12 @@ export class RaindropService {
     xhttp.open("DELETE", `https://api.raindrop.io/rest/v1/raindrop/${imageID}`, true);
     xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
     xhttp.send();
+  }
+
+  logout() {
+    this.access_token = "";
+    this.changeUser({fullName: "", _id: null});
+    localStorage.removeItem("raindropToken");
   }
 
 

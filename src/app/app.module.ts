@@ -25,6 +25,7 @@ import {MatCardModule} from '@angular/material/card';
 import { CardComponent } from './card/card.component';
 import { SavedCardComponent } from './saved-card/saved-card.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatMenuModule} from '@angular/material/menu'; 
 
 const appRoutes: Routes = [
   {
@@ -61,6 +62,7 @@ const appRoutes: Routes = [
     FormsModule,
     MatPaginatorModule,
     RouterModule.forRoot(appRoutes),
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
