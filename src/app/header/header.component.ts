@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RaindropService } from "../raindrop.service";
 import { ActivatedRoute } from '@angular/router';
 import { ImageFinderService } from "../imagefinder.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { ImageFinderService } from "../imagefinder.service";
 })
 export class HeaderComponent implements OnInit {
 
-  code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
+  code_url = `https://raindrop.io/oauth/authorize?client_id=${environment.clientID}&redirect_uri=${environment.redirectURI}`;
   user = {fullName: "", _id: null}
 
   constructor(private raindrop: RaindropService, private route: ActivatedRoute, private imageFinder: ImageFinderService) { }

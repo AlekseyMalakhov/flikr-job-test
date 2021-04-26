@@ -4,6 +4,7 @@ import { RaindropService } from "../raindrop.service";
 import {PageEvent} from '@angular/material/paginator';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-search-page',
@@ -11,7 +12,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
   styleUrls: ['./search-page.component.css']
 })
 export class SearchPageComponent implements OnInit {  
-  code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
+  code_url = `https://raindrop.io/oauth/authorize?client_id=${environment.clientID}&redirect_uri=${environment.redirectURI}`;
 
   private searchSub$ = new Subject<string>();
   searchText = "";

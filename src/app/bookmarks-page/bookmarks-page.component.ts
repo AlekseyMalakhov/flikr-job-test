@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import { RaindropService } from "../raindrop.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-bookmarks-page',
@@ -28,7 +29,7 @@ export class BookmarksPageComponent implements OnInit {
   images = [];
   imagesOnPage = [];
   user = {fullName: "", _id: null};
-  code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
+  code_url = `https://raindrop.io/oauth/authorize?client_id=${environment.clientID}&redirect_uri=${environment.redirectURI}`;
 
   ngOnInit(): void {
     this.raindrop.currentImages.subscribe(images => {

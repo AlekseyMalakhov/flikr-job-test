@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from "../environments/environment";
 import { Observable, throwError } from 'rxjs';
 
 interface User {
@@ -32,12 +33,7 @@ export class RaindropService {
     }
   }
 
-  clientID: string = "60851961a8b11bc584d527bd";
-  redirectURI: string = "http://localhost:4200";
-  //redirectURI: string = "https://flikr-job-test.herokuapp.com";
-  serverURI: string = "http://localhost:3000";
-  //serverURI: string = "https://flikr-job-test.herokuapp.com";
-  token_url = "https://raindrop.io/oauth/access_token";
+  //token_url = "https://raindrop.io/oauth/access_token";
   access_token: string = "";
 
   authHeaders;
@@ -65,7 +61,7 @@ export class RaindropService {
   }
 
   getTokenRequest(bodyJSON) {
-    return this.http.post(this.serverURI + "/get_token", bodyJSON, this.JSONHeaders)
+    return this.http.post(environment.serverURI + "/get_token", bodyJSON, this.JSONHeaders)
   }
   getToken(code) {
     const getColls = this.getCollections.bind(this);
@@ -83,8 +79,8 @@ export class RaindropService {
     }
     const body = {
       code: code,
-      client_id: this.clientID,
-      redirect_uri: this.redirectURI,
+      client_id: environment.clientID,
+      redirect_uri: environment.redirectURI,
       client_secret: "7cf15cbe-222a-462b-8c35-db5933ee4ac1",
       grant_type: "authorization_code",
     };
