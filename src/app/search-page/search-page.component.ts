@@ -3,17 +3,17 @@ import { ImageFinderService } from "../imagefinder.service";
 import { RaindropService } from "../raindrop.service";
 import {PageEvent} from '@angular/material/paginator';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.css']
 })
-export class SearchPageComponent implements OnInit {
-  //private subject: Subject<string> = new Subject();
+export class SearchPageComponent implements OnInit {  
   code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
 
+  private searchSub$ = new Subject<string>();
   searchText = "";
   images = [];
   imagesOnPage = [];
@@ -33,7 +33,7 @@ export class SearchPageComponent implements OnInit {
   set length(value: number) {
       this._length = value;
   }
-  
+ 
   constructor(private ImageFinderService: ImageFinderService, private raindrop: RaindropService) { }
 
   ngOnInit(): void {
@@ -44,11 +44,20 @@ export class SearchPageComponent implements OnInit {
     });
     this.ImageFinderService.currentSearchText.subscribe(searchText => this.searchText = searchText);
     this.raindrop.currentUser.subscribe(user => this.user = user);
-    //this.subject.pipe(debounceTime(10000)).subscribe(searchText => this.search(searchText));
-  }  
+
+    this.searchSub$.pipe(
+      debounceTime(700),
+      distinctUntilChanged()
+    ).subscribe((searchText: string) => {
+      this.searchText = searchText;
+      if (this.searchText) {
+        this.ImageFinderService.changeSearchText(this.searchText);
+      }
+    });
+  }
 
   search(e) {
-    this.ImageFinderService.changeSearchText(e.target.value);
+    this.searchSub$.next(e.target.value);
   }
 
   handlePageEvent(event: PageEvent) {
@@ -63,11 +72,5 @@ export class SearchPageComponent implements OnInit {
       this.last_item = this.first_item + this.pageSize - 1;
     }
     this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);    
-  }
-
-  checkScrollBar() {
-    if (window.innerWidth > document.body.clientWidth) {
-      return true;
-    }
   }
 }

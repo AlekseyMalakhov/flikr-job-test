@@ -35,9 +35,11 @@ export class BookmarksPageComponent implements OnInit {
       this.images = images;
       this.length = this.images.length;
       this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
-    });
-    this.raindrop.getCollection();
+    });    
     this.raindrop.currentUser.subscribe(user => this.user = user);
+    if (this.user._id) {
+      this.raindrop.getCollection();
+    }
   }
 
   handlePageEvent(event: PageEvent) {
@@ -52,12 +54,6 @@ export class BookmarksPageComponent implements OnInit {
       this.last_item = this.first_item + this.pageSize - 1;
     }
     this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);    
-  }
-
-  checkScrollBar() {
-    if (window.innerWidth > document.body.clientWidth) {
-      return true;
-    }
   }
 
 }

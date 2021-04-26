@@ -19,7 +19,7 @@
     </div>
 
     <mat-paginator
-        *ngIf="length !== 0 && checkScrollBar()"
+        *ngIf="length !== 0"
         (page)="handlePageEvent($event)"
         [length]="length"
         [pageSize]="pageSize"
