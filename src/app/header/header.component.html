@@ -1,17 +1,24 @@
 <mat-toolbar color="primary">
     <div>
-        <span>Image Finder</span>
+        <button class="pages" mat-icon-button [matMenuTriggerFor]="pages_type">
+            <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">menu</mat-icon>
+        </button>
+        <mat-menu #pages_type="matMenu">
+            <button mat-menu-item (click)="onSearchPageSelect()">Search page</button>
+            <button mat-menu-item (click)="onBookmarksPageSelect()">Bookmarks page</button>
+        </mat-menu>
+        <span class="name">Image Finder</span>
     </div>   
     <div>
         <span class="name">{{user.fullName}}</span>
-        <a mat-icon-button  [href]="code_url" target="_blank" *ngIf="!user._id">
+        <a class="user" mat-icon-button  [href]="code_url" target="_blank" *ngIf="!user._id">
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </a>
         
-        <button mat-icon-button *ngIf="user._id" [matMenuTriggerFor]="menu">
+        <button class="user" mat-icon-button *ngIf="user._id" [matMenuTriggerFor]="account">
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </button>
-        <mat-menu #menu="matMenu">
+        <mat-menu #account="matMenu">
             <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
     </div> 

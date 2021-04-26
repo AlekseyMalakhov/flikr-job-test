@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RaindropService } from "../raindrop.service";
 import { ActivatedRoute } from '@angular/router';
+import { ImageFinderService } from "../imagefinder.service";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ export class HeaderComponent implements OnInit {
   code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
   user = {fullName: "", _id: null}
 
-  constructor(private raindrop: RaindropService, private route: ActivatedRoute) { }
+  constructor(private raindrop: RaindropService, private route: ActivatedRoute, private imageFinder: ImageFinderService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -25,6 +26,14 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.raindrop.logout();
+  }
+
+  onSearchPageSelect(): void {
+    this.imageFinder.changePage("search");
+  }
+
+  onBookmarksPageSelect(): void {
+    this.imageFinder.changePage("bookmarks");
   }
 
 }

@@ -8,12 +8,12 @@ import { ImageFinderService } from "../imagefinder.service";
 })
 export class MainComponent implements OnInit {
 
-  constructor(private ImageFinderService: ImageFinderService) { }
+  constructor(private imageFinder: ImageFinderService) { }
 
   page:string = "";
 
   ngOnInit(): void {
-    this.ImageFinderService.currentPage.subscribe(page => this.page = page);
+    this.imageFinder.currentPage.subscribe(page => this.page = page);
   }
 
 }

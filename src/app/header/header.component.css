@@ -9,8 +9,12 @@ mat-toolbar {
     line-height: 36px;
 }
 
-a {
+.user {
     margin-left: 10px;
+}
+
+.pages {
+    margin-right: 10px;
 }
 
 .name {
