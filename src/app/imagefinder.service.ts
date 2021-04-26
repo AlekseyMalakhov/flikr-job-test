@@ -3,7 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 import { environment } from "../environments/environment";
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators'
 
 const createImages = (data) => {
   type imageObj = {

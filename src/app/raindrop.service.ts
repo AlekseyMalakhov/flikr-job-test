@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http'
+import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators'
 
 interface User {
   fullName: string;
@@ -54,7 +53,7 @@ export class RaindropService {
     };
     this.JSONHeaders = {
       headers: new HttpHeaders({
-        Authorization: token,
+        'Content-Type':  'application/json',
       })
     };
     this.JSONAuthHeaders = {
@@ -65,6 +64,9 @@ export class RaindropService {
     };
   }
 
+  getTokenRequest(bodyJSON) {
+    return this.http.post(this.serverURI + "/get_token", bodyJSON, this.JSONHeaders)
+  }
   getToken(code) {
     const getColls = this.getCollections.bind(this);
     const getUser = this.getUser.bind(this);
@@ -86,20 +88,12 @@ export class RaindropService {
       client_secret: "7cf15cbe-222a-462b-8c35-db5933ee4ac1",
       grant_type: "authorization_code",
     };
-    const bodyJSON = JSON.stringify(body);          
-    const xhttp = new XMLHttpRequest();  
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        const resp = JSON.parse(this.responseText);
-        setToken("Bearer "+ resp.access_token);
-        localStorage.setItem("raindropToken", "Bearer " + resp.access_token);    
-        getUser();
-        getColls();        
-      }
-    };
-    xhttp.open("POST", this.serverURI + "/get_token", true);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(bodyJSON);
+    this.getTokenRequest(body).subscribe((resp: any) => {
+      setToken("Bearer "+ resp.access_token);
+      localStorage.setItem("raindropToken", "Bearer " + resp.access_token);    
+      getUser();
+      getColls();
+    });
   }
 
   userRequest() {
