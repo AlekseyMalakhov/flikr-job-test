@@ -151,21 +151,16 @@ export class RaindropService {
     this.images.next(newImages);
   }
 
-  getCollection() {
+  getCollRequest() {
     let id: number = 0;
     this.currentCollID.subscribe(collID => id = collID);
-    const xhttp = new XMLHttpRequest();
-    const setImages = this.changeImages.bind(this);
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        const images = JSON.parse(this.responseText).items;
-        console.log(images);
-        setImages(images);
-      }
-    };
-    xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${id}`, true);
-    xhttp.setRequestHeader("Authorization", this.access_token);
-    xhttp.send();
+    return this.http.get(url + `/raindrops/${id}`, this.authHeaders);
+  }
+  getCollection() {
+    this.getCollRequest().subscribe((resp: any) => {
+      const images = resp.items;
+      this.changeImages(images);
+    });
   }
 
   createBookmark(imageObj) {
