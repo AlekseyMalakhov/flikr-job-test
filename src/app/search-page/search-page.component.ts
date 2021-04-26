@@ -61,6 +61,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   handlePageEvent(event: PageEvent) {
+    console.log(event);
     this.length = event.length;
     this.pageSize = event.pageSize; //items per page
     this.pageIndex = event.pageIndex;   
@@ -72,5 +73,13 @@ export class SearchPageComponent implements OnInit {
       this.last_item = this.first_item + this.pageSize - 1;
     }
     this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);    
+  }
+
+  checkBottom() {
+    if (this.pageSize < this.length) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
