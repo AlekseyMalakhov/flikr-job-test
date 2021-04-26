@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http'
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators'
 
 interface User {
   fullName: string;
   _id: null;
 }
 
+const url = "https://api.raindrop.io/rest/v1";
+
 @Injectable({
   providedIn: 'root'
 })
 export class RaindropService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   private user = new BehaviorSubject({fullName: "", _id: null});
   currentUser = this.user.asObservable();
@@ -35,11 +41,36 @@ export class RaindropService {
   token_url = "https://raindrop.io/oauth/access_token";
   access_token: string = "";
 
+  authHeaders;
+  JSONHeaders;
+  JSONAuthHeaders;
+
+  createHttpHeaders() {
+    const token = this.access_token;
+    this.authHeaders = {
+      headers: new HttpHeaders({
+        Authorization: token,
+      })
+    };
+    this.JSONHeaders = {
+      headers: new HttpHeaders({
+        Authorization: token,
+      })
+    };
+    this.JSONAuthHeaders = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: token,
+      })
+    };
+  }
+
   getToken(code) {
     const getColls = this.getCollections.bind(this);
     const getUser = this.getUser.bind(this);
     const setToken = (token) => {
       this.access_token = token;
+      this.createHttpHeaders();      
     } 
     const existingToken = localStorage.getItem("raindropToken");
     if (existingToken && existingToken !== "undefined") {
@@ -60,8 +91,8 @@ export class RaindropService {
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         const resp = JSON.parse(this.responseText);
-        setToken(resp.access_token);
-        localStorage.setItem("raindropToken", resp.access_token);
+        setToken("Bearer "+ resp.access_token);
+        localStorage.setItem("raindropToken", "Bearer " + resp.access_token);    
         getUser();
         getColls();        
       }
@@ -71,21 +102,14 @@ export class RaindropService {
     xhttp.send(bodyJSON);
   }
 
-  getUser() {
-    const setUser = (res) => {
-      console.log(res.user);
-      this.changeUser(res.user);
-    }
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        setUser(JSON.parse(this.responseText));
-      }
-    };
-    xhttp.open("GET", "https://api.raindrop.io/rest/v1/user", true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
-    xhttp.send();
+  userRequest() {
+    return this.http.get(url + "/user", this.authHeaders);
   }
+  getUser() {
+    this.changeUser.bind(this);
+    this.userRequest().subscribe((newUser: any) => this.changeUser(newUser.user));
+  }
+  
 
   getCollections() {
     const xhttp = new XMLHttpRequest();
@@ -96,7 +120,7 @@ export class RaindropService {
       }
     };
     xhttp.open("GET", "https://api.raindrop.io/rest/v1/collections", true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Authorization", this.access_token);
     xhttp.send();
   }
 
@@ -125,7 +149,7 @@ export class RaindropService {
       }
     };
     xhttp.open("POST", "https://api.raindrop.io/rest/v1/collection", true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Authorization", this.access_token);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(newCollection));
   }
@@ -149,7 +173,7 @@ export class RaindropService {
       }
     };
     xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${id}`, true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Authorization", this.access_token);
     xhttp.send();
   }
 
@@ -160,7 +184,7 @@ export class RaindropService {
       }
     };
     xhttp.open("POST", "https://api.raindrop.io/rest/v1/raindrop", true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Authorization", this.access_token);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(imageObj);
   }
@@ -175,7 +199,7 @@ export class RaindropService {
       }
     };
     xhttp.open("DELETE", `https://api.raindrop.io/rest/v1/raindrop/${imageID}`, true);
-    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.setRequestHeader("Authorization", this.access_token);
     xhttp.send();
   }
 
