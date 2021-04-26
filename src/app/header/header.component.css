@@ -13,11 +13,18 @@ mat-toolbar {
     margin-left: 10px;
 }
 
-.pages {
-    margin-right: 10px;
+.pages {    
+    display: none;
 }
 
 .name {
     position: relative;
     top: 4px;
+}
+
+@media (max-width: 450px) {
+    .pages {
+        margin-right: 10px;
+        display: inline-block;
+    }
 }

@@ -1,8 +1,14 @@
-.example-container {
+.main-part {
     flex: 1;
     background: "grey";
 }
 
 mat-sidenav {
     width: 100px;
+}
+
+@media (max-width: 450px) {
+    .mat-sidenav {
+        display: none;
+    }
 }
