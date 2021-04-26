@@ -134,18 +134,15 @@ export class RaindropService {
     }
   }
 
-  createCollection() {
+  createCollrequest() {
     const newCollection = {title: "ImageFinder"};
-    const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText);
-      }
-    };
-    xhttp.open("POST", "https://api.raindrop.io/rest/v1/collection", true);
-    xhttp.setRequestHeader("Authorization", this.access_token);
-    xhttp.setRequestHeader("Content-type", "application/json");
-    xhttp.send(JSON.stringify(newCollection));
+    return this.http.post(url + "/collection", newCollection, this.JSONAuthHeaders);
+  }
+  createCollection() {
+    this.createCollrequest().subscribe((resp: any) => {
+      this.changeCollID(resp.item._id);
+      this.getCollection();
+    });
   }
 
   private images = new BehaviorSubject([]);
