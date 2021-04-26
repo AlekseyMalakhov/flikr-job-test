@@ -75,7 +75,7 @@ export class RaindropService {
       this.createHttpHeaders();      
     } 
     const existingToken = localStorage.getItem("raindropToken");
-    if (existingToken && existingToken !== "undefined") {
+    if (existingToken && existingToken !== "Bearer undefined") {
       setToken(existingToken);
       getUser();
       getColls();

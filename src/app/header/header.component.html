@@ -7,7 +7,7 @@
             <button mat-menu-item (click)="onSearchPageSelect()">Search page</button>
             <button mat-menu-item (click)="onBookmarksPageSelect()">Bookmarks page</button>
         </mat-menu>
-        <span class="name">Image Finder</span>
+        <span class="appName">Image Finder</span>
     </div>   
     <div>
         <span class="name">{{user.fullName}}</span>
@@ -19,6 +19,7 @@
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </button>
         <mat-menu #account="matMenu">
+            <p class="menuName">{{user.fullName}}</p>
             <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
     </div> 

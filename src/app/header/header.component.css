@@ -9,6 +9,10 @@ mat-toolbar {
     line-height: 36px;
 }
 
+.menuName {
+    margin: 5px 10px;
+}
+
 .user {
     margin-left: 10px;
 }
@@ -17,7 +21,7 @@ mat-toolbar {
     display: none;
 }
 
-.name {
+.name, .appName {
     position: relative;
     top: 4px;
 }
@@ -26,5 +30,11 @@ mat-toolbar {
     .pages {
         margin-right: 10px;
         display: inline-block;
+    }
+}
+
+@media (max-width: 500px) {
+    .name {
+        display: none;
     }
 }
