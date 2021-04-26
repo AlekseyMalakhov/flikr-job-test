@@ -12,6 +12,7 @@ import { debounceTime } from 'rxjs/operators';
 })
 export class SearchPageComponent implements OnInit {
   //private subject: Subject<string> = new Subject();
+  code_url = `https://raindrop.io/oauth/authorize?client_id=${this.raindrop.clientID}&redirect_uri=${this.raindrop.redirectURI}`;
 
   searchText = "";
   images = [];
@@ -62,5 +63,11 @@ export class SearchPageComponent implements OnInit {
       this.last_item = this.first_item + this.pageSize - 1;
     }
     this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);    
+  }
+
+  checkScrollBar() {
+    if (window.innerWidth > document.body.clientWidth) {
+      return true;
+    }
   }
 }

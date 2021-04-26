@@ -1,6 +1,6 @@
-<div class="container">  
+<div class="container">
     <div *ngIf = "!user._id">
-        <p>To save bookmarks, please <a [href]="code_url">login</a></p>
+        <p>To save bookmarks, please <a [href]="code_url" target="_blank">login</a></p>
     </div>
     <form class="searchInput">
         <mat-form-field class = "search">
@@ -25,7 +25,7 @@
     </div>
 
     <mat-paginator
-        *ngIf="length !== 0"
+        *ngIf="length !== 0 && checkScrollBar()"
         (page)="handlePageEvent($event)"
         [length]="length"
         [pageSize]="pageSize"

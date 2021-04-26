@@ -54,4 +54,10 @@ export class BookmarksPageComponent implements OnInit {
     this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);    
   }
 
+  checkScrollBar() {
+    if (window.innerWidth > document.body.clientWidth) {
+      return true;
+    }
+  }
+
 }
