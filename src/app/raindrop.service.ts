@@ -110,18 +110,12 @@ export class RaindropService {
     this.userRequest().subscribe((newUser: any) => this.changeUser(newUser.user));
   }
   
-
+  collectionRequest() {
+    return this.http.get(url + "/collections", this.authHeaders);
+  }
   getCollections() {
-    const xhttp = new XMLHttpRequest();
-    const check = this.checkCollections.bind(this);
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        check(JSON.parse(this.responseText));
-      }
-    };
-    xhttp.open("GET", "https://api.raindrop.io/rest/v1/collections", true);
-    xhttp.setRequestHeader("Authorization", this.access_token);
-    xhttp.send();
+    this.checkCollections.bind(this);
+    this.collectionRequest().subscribe(coll => this.checkCollections(coll));
   }
 
   private collID = new BehaviorSubject(0);
