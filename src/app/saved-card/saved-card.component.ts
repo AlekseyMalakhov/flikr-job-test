@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { RaindropService } from "../raindrop.service";
 
 @Component({
   selector: 'app-saved-card',
@@ -7,14 +7,12 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./saved-card.component.css']
 })
 export class SavedCardComponent implements OnInit {
-  @Output() removeItemEvent = new EventEmitter<any>();
-
   @Input() image;
   @Input() index;
   @Input() first_item;
   tags = "";
 
-  constructor() { }
+  constructor(private raindrop: RaindropService) { }
 
   ngOnInit(): void {
     const tagsArr = this.image.tags;
@@ -30,12 +28,7 @@ export class SavedCardComponent implements OnInit {
   }
 
   delete() {
-    const bookmarks = localStorage.getItem("imageFinder");
-    const arr = JSON.parse(bookmarks);
-    arr.splice((this.first_item + this.index), 1);
-    const JSONstr = JSON.stringify(arr);
-    localStorage.setItem("imageFinder", JSONstr);
-    this.removeItemEvent.emit();
+    this.raindrop.deleteBookmark(this.image._id);
   }
 
 }

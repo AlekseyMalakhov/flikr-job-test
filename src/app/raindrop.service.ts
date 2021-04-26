@@ -107,9 +107,9 @@ export class RaindropService {
 
   checkCollections(resp) {
     const coll = resp.items.find((el) => el.title === "ImageFinder");
-    if (coll) {
-      this.getCollection(coll._id);
-      this.changeCollID(coll._id)
+    if (coll) {      
+      this.changeCollID(coll._id);
+      this.getCollection();
     } else {
       this.createCollection();
     }
@@ -135,7 +135,9 @@ export class RaindropService {
     this.images.next(newImages);
   }
 
-  getCollection(collID) {
+  getCollection() {
+    let id: number = 0;
+    this.currentCollID.subscribe(collID => id = collID);
     const xhttp = new XMLHttpRequest();
     const setImages = this.changeImages.bind(this);
     xhttp.onreadystatechange = function() {
@@ -145,7 +147,7 @@ export class RaindropService {
         setImages(images);
       }
     };
-    xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${collID}`, true);
+    xhttp.open("GET", `https://api.raindrop.io/rest/v1/raindrops/${id}`, true);
     xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
     xhttp.send();
   }
@@ -161,6 +163,20 @@ export class RaindropService {
     xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(imageObj);
+  }
+
+  deleteBookmark(imageID) {
+    const update = this.getCollection.bind(this);
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText);
+        update();
+      }
+    };
+    xhttp.open("DELETE", `https://api.raindrop.io/rest/v1/raindrop/${imageID}`, true);
+    xhttp.setRequestHeader("Authorization", "Bearer " + this.access_token);
+    xhttp.send();
   }
 
 

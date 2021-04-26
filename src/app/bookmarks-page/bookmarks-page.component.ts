@@ -34,14 +34,7 @@ export class BookmarksPageComponent implements OnInit {
       this.length = this.images.length;
       this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
     });
-  }
-
-  updateImages() {
-
-    // const imgString = localStorage.getItem("imageFinder");
-    // this.images = JSON.parse(imgString);
-    // this.length = this.images.length;
-    // this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
+    this.raindrop.getCollection();
   }
 
   handlePageEvent(event: PageEvent) {
