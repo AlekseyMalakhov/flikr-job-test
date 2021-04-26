@@ -8,23 +8,21 @@ import { ImageFinderService } from "../imagefinder.service";
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(private ImageFinderService: ImageFinderService) { }
+  constructor(private imageFinder: ImageFinderService) { }
 
   searchIconColor: string = "primary";
   bookmarksIconColor: string = "basic";
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSearchPageSelect(): void {
-    this.ImageFinderService.changePage("search");
+    this.imageFinder.changePage("search");
     this.searchIconColor = "primary";
     this.bookmarksIconColor = "basic";
   }
 
   onBookmarksPageSelect(): void {
-    this.ImageFinderService.changePage("bookmarks");
+    this.imageFinder.changePage("bookmarks");
     this.searchIconColor = "basic";
     this.bookmarksIconColor = "primary";
   }

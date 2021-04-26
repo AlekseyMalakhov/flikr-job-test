@@ -8,11 +8,11 @@
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </a>
         
-        <button mat-icon-button  [href]="code_url" target="_blank" *ngIf="user._id" [matMenuTriggerFor]="menu">
+        <button mat-icon-button *ngIf="user._id" [matMenuTriggerFor]="menu">
             <mat-icon class = "login" aria-hidden="false" aria-label="Account icon">account_circle</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="logout()">Logout</button>
         </mat-menu>
-    </div>        
+    </div> 
 </mat-toolbar>
