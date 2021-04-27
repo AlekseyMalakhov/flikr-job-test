@@ -41,13 +41,4 @@ describe('BookmarksPageComponent', () => {
     console.log(httpTestingController);
     expect(component).toBeTruthy();
   });
-
-  // it("should update images on delete", () => {
-  //   const JSONstr = JSON.stringify(mockSavedImgs);
-  //   localStorage.setItem("imageFinder", JSONstr);
-  //   component.updateImages();
-  //   const jsonImages = JSON.stringify(component.images);
-  //   expect(jsonImages).toEqual('[{"url":"test1.jpg","tags":"test"},{"url":"test2.jpg","tags":"test"}]');
-  //   localStorage.clear();
-  // });
 });

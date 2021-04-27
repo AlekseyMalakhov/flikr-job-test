@@ -170,6 +170,7 @@ export class RaindropService {
   logout() {
     this.access_token = "";
     this.changeUser({fullName: "", _id: null});
+    this.changeImages([]);
     localStorage.removeItem("raindropToken");
     this.router.navigate([""]);
   }
