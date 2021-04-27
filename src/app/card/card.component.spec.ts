@@ -72,5 +72,6 @@ describe('CardComponent', () => {
     const req = httpTestingController.expectOne('https://api.raindrop.io/rest/v1/raindrop');
     expect(req.request.method).toEqual('POST');
     expect(req.request.body).toEqual('{"link":"testURL","tags":["tag1"],"type":"image","collection":{"$id":123}}');
+    httpTestingController.verify();
   });
 });

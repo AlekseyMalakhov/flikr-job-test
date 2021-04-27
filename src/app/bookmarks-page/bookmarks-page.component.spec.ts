@@ -37,8 +37,6 @@ describe('BookmarksPageComponent', () => {
   }); 
 
   it('should create', () => {
-    const httpTestingController = TestBed.inject(HttpTestingController);
-    console.log(httpTestingController);
     expect(component).toBeTruthy();
   });
 });
