@@ -29,7 +29,7 @@ export class AppComponent implements OnInit{
         this.raindrop.logout();
         this.hide = true;
       }
-    }, 10000);
+    }, 60000);
   }
 
   removeMask() {
