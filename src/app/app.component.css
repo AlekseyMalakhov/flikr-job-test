@@ -12,3 +12,25 @@ mat-sidenav {
         display: none;
     }
 }
+
+.mask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: gray;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.maskText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+}

@@ -8,3 +8,7 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 <app-footer></app-footer>
+<div *ngIf="hide" class="mask" (click)="removeMask()"></div>
+<div *ngIf="hide" class="maskText" (click)="removeMask()">
+    <h1>You have been logged out because of inactivity</h1>
+</div>

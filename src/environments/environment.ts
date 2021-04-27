@@ -7,7 +7,8 @@ export const environment = {
   key: "1602f3a321b52a9d5d58447c288352bf",
   redirectURI: "http://localhost:4200",
   serverURI: "http://localhost:3000",
-  clientID: "60851961a8b11bc584d527bd",
+  clientID: "6087cf2832de7c048515a1d9",
+  clientSecret: "7f49bf67-8a67-47e5-918e-9c9523747655",
 };
 
 /*

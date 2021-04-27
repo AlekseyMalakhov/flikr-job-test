@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from "../environments/environment";
-import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 interface User {
   fullName: string;
@@ -16,7 +16,7 @@ const url = "https://api.raindrop.io/rest/v1";
   providedIn: 'root'
 })
 export class RaindropService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private user = new BehaviorSubject({fullName: "", _id: null});
   currentUser = this.user.asObservable();
@@ -33,7 +33,6 @@ export class RaindropService {
     }
   }
 
-  //token_url = "https://raindrop.io/oauth/access_token";
   access_token: string = "";
 
   authHeaders;
@@ -81,7 +80,7 @@ export class RaindropService {
       code: code,
       client_id: environment.clientID,
       redirect_uri: environment.redirectURI,
-      client_secret: "7cf15cbe-222a-462b-8c35-db5933ee4ac1",
+      client_secret: environment.clientSecret,
       grant_type: "authorization_code",
     };
     this.getTokenRequest(body).subscribe((resp: any) => {
@@ -172,7 +171,7 @@ export class RaindropService {
     this.access_token = "";
     this.changeUser({fullName: "", _id: null});
     localStorage.removeItem("raindropToken");
-    window.location.href = "/";
+    this.router.navigate([""]);
   }
 
 
