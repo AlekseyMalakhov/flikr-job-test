@@ -10,11 +10,13 @@ export class AppComponent implements OnInit{
   title = 'flikr-job-test';
   timer;
   hide: boolean = false;
+  user = {fullName: "", _id: null}
 
   constructor(private raindrop: RaindropService) { }
 
   ngOnInit() {  
-    this.resetTimer();
+    this.raindrop.currentUser.subscribe(user => this.user = user);
+    this.resetTimer();    
   }
 
   @HostListener('document:mousemove')
@@ -23,9 +25,11 @@ export class AppComponent implements OnInit{
   resetTimer() {
     clearTimeout(this.timer);
     this.timer = setTimeout(() => {
-      this.raindrop.logout();
-      this.hide = true;
-    }, 60000);
+      if (this.user._id) {
+        this.raindrop.logout();
+        this.hide = true;
+      }
+    }, 10000);
   }
 
   removeMask() {

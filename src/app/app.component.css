@@ -17,7 +17,7 @@ mat-sidenav {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     background-color: gray;
     opacity: 0.4;
     height: 100%;
@@ -29,8 +29,13 @@ mat-sidenav {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     z-index: 3;
+}
+
+.maskText h1 {
+    background-color: white;
+    padding: 20px 20px;
 }
