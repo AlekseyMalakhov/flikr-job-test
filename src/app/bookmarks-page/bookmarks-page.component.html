@@ -1,5 +1,6 @@
 <div class="container" *ngIf = "user._id">
-    <h2>Bookmarks</h2> 
+    <h2>Bookmarks</h2>
+    <p *ngIf="images.length === 0">You seems don't have any saved images yet.</p>
     <mat-paginator
         *ngIf="length !== 0"
         (page)="handlePageEvent($event)"
