@@ -44,7 +44,6 @@ export class BookmarksPageComponent implements OnInit {
   }
 
   handlePageEvent(event: PageEvent) {
-    console.log(event);
     this.length = event.length;
     this.pageSize = event.pageSize; //items per page
     this.pageIndex = event.pageIndex;   

@@ -1,12 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ImageFinderService } from './imagefinder.service';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  {
+    path: '**',
+    redirectTo: '/',
+  },  
+];
 
 describe('ImageFinderService', () => {
   let service: ImageFinderService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterModule.forRoot(appRoutes)],
+    });
     service = TestBed.inject(ImageFinderService);
   });
 

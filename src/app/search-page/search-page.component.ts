@@ -34,25 +34,27 @@ export class SearchPageComponent implements OnInit {
   set length(value: number) {
       this._length = value;
   }
+
+  debounceTime: number = 700;
  
-  constructor(private ImageFinderService: ImageFinderService, private raindrop: RaindropService) { }
+  constructor(private imageFinder: ImageFinderService, private raindrop: RaindropService) { }
 
   ngOnInit(): void {
-    this.ImageFinderService.currentImages.subscribe(images => {
+    this.imageFinder.currentImages.subscribe(images => {
       this.images = images;
       this.length = images.length;
       this.imagesOnPage = this.images.slice(this.first_item, this.last_item + 1);
     });
-    this.ImageFinderService.currentSearchText.subscribe(searchText => this.searchText = searchText);
+    this.imageFinder.currentSearchText.subscribe(searchText => this.searchText = searchText);
     this.raindrop.currentUser.subscribe(user => this.user = user);
 
     this.searchSub$.pipe(
-      debounceTime(700),
+      debounceTime(this.debounceTime),
       distinctUntilChanged()
     ).subscribe((searchText: string) => {
       this.searchText = searchText;
       if (this.searchText) {
-        this.ImageFinderService.changeSearchText(this.searchText);
+        this.imageFinder.changeSearchText(this.searchText);
       }
     });
   }

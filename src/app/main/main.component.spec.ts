@@ -1,6 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MainComponent } from './main.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { Routes, RouterModule } from '@angular/router';
+
+const appRoutes: Routes = [
+  {
+    path: '**',
+    redirectTo: '/',
+  },  
+];
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -10,6 +19,7 @@ describe('MainComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MainComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      imports: [HttpClientTestingModule, RouterModule.forRoot(appRoutes)],
     })
     .compileComponents();
   });
