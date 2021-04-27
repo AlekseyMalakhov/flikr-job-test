@@ -53,6 +53,5 @@ describe('SavedCardComponent', () => {
     deleteButton.click();
     const req = httpTestingController.expectOne('https://api.raindrop.io/rest/v1/raindrop/25');
     expect(req.request.method).toEqual('DELETE');
-
   });
 });

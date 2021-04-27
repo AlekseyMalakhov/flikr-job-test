@@ -3,6 +3,7 @@ import { HeaderComponent } from './header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { Routes, RouterModule } from '@angular/router';
+import {MatMenuModule} from '@angular/material/menu'; 
 
 const appRoutes: Routes = [
   {
@@ -19,7 +20,7 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [HttpClientTestingModule, RouterModule.forRoot(appRoutes)],
+      imports: [HttpClientTestingModule, RouterModule.forRoot(appRoutes), MatMenuModule],
     })
     .compileComponents();
   });
@@ -30,7 +31,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  // it('should create', () => {
-  //   expect(component).toBeTruthy();
-  // });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
