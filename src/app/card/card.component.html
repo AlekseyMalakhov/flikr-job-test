@@ -6,6 +6,7 @@
     <div class="content" *ngIf = "user._id">
         <div class="action">
             <button mat-stroked-button (click)="addBookmark()">Bookmark it!</button>
+            <mat-icon *ngIf = "added" class="done" aria-hidden="false" aria-label="done">done</mat-icon>
         </div>
         <mat-card-content>
             <p>{{tagsString}}</p>

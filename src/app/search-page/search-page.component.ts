@@ -61,6 +61,9 @@ export class SearchPageComponent implements OnInit {
 
   search(e) {
     this.searchSub$.next(e.target.value);
+    if (e.key === "Enter") {
+      e.target.blur();
+    }
   }
 
   handlePageEvent(event: PageEvent) {

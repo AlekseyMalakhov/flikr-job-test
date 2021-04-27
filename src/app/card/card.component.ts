@@ -9,10 +9,11 @@ import { RaindropService } from "../raindrop.service";
 export class CardComponent implements OnInit {
   @Input() image;
   tags = [];
-  tagsString = "";
-  tag = "";
-  collID = 0;
-  user = {fullName: "", _id: null}
+  tagsString: string = "";
+  tag: string = "";
+  collID: number = 0;
+  user = {fullName: "", _id: null};
+  added: boolean = false;
 
   constructor(private raindrop: RaindropService) { }
 
@@ -54,6 +55,7 @@ export class CardComponent implements OnInit {
     }
     const JSONstr = JSON.stringify(imageObj);
     this.raindrop.createBookmark(JSONstr);
+    this.added = true;
   }
 
 }

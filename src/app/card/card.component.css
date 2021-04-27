@@ -25,3 +25,10 @@ img {
 .tags {
     width: 100%;
 }
+
+.done {
+    position: relative;
+    top: 5px;
+    left: 10px;
+    color: #4CAF50;
+}
